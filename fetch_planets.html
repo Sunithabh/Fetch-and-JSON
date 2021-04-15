@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fetch Planets</title>
+        <script>
+            window.addEventListener("load", function(){
+                fetch("https://handlers.education.launchcode.org/static/planets.json").then (function(response){
+                    // Access the JSON in the response
+                    response.json().then(function(json){
+                        //view a portion of the JSON into the app.
+                       /* const destination = document.getElementById("destination");
+                        destination.innerHTML=`<h3>Planet ${json[0].name}</h3>`;*/
+
+                        //use an event to change the planet information we see
+                        const destination = document.getElementById("destination");
+                        let index=0;
+                        destination.addEventListener("click", function(){
+                            /*destination.innerHTML = `
+                            <div>
+                                <h3>Planet ${json[0].name}</h3>
+                                <img src = ${json[0].image} height = 250></img>
+                            </div>
+                            `;*/
+
+                            // let's dynamically change which planet's info we're displaying each time the header is clicked
+                            destination.innerHTML = `
+                            <div>
+                                <h3>Planet ${json[index].name}</h3>
+                                <img src = ${json[index].image} height = 250></img>
+                            </div>
+                            `;
+                            for (let i =0; i<json.length;i++){
+                                index =(index + 1);
+                                return index;   
+                            }
+                            //index = (index+1) % json.length;
+                        });
+                    });
+                    console.log(response);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Destination</h1>
+        <div id="destination">
+        <h3>Planet</h3>
+        </div>
+    </body>
+</html>
